@@ -1,0 +1,23 @@
+# Setup - nao modifique
+!pip install -q tiktoken sentence-transformers huggingface_hub matplotlib numpy scikit-learn
+
+import tiktoken
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.decomposition import PCA
+from sentence_transformers import SentenceTransformer
+from huggingface_hub import InferenceClient
+from google.colab import userdata
+import time
+
+try:
+    HF_TOKEN = userdata.get("HF_TOKEN")
+    print("Token HF carregado")
+except:
+    HF_TOKEN = None
+    print("Configure HF_TOKEN em Colab Secrets")
+
+encoder = tiktoken.get_encoding("cl100k_base")
+modelo_emb = SentenceTransformer("all-MiniLM-L6-v2")
+print("Setup completo!")
